@@ -23,10 +23,11 @@
 
         <!-- Header -->
         <header class="header">
-            <div class="logo">
-                <span class="logo-icon">◈</span>
-                <span class="logo-text">Diagnostic<span class="accent">IA</span></span>
-            </div>
+            <a href="./" class="logo-link">
+                <div class="logo">
+                    <img src="https://crossdata.fr/wp-content/uploads/2024/01/logo-crossdata.svg" alt="Cross Data" class="logo-image">
+                </div>
+            </a>
             <div class="progress-indicator" id="progressIndicator">
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
@@ -152,6 +153,10 @@
             <section class="screen" id="resultsScreen">
                 <div class="results-header">
                     <div class="results-badge">Diagnostic terminé</div>
+                    <div class="reliability-indicator" id="reliabilityIndicator">
+                        <span class="reliability-badge" id="reliabilityBadge">Fiable</span>
+                        <span class="reliability-text" id="reliabilityText"></span>
+                    </div>
                     <h2 class="results-title">Votre Profil de Maturité IA</h2>
                 </div>
 
@@ -167,8 +172,17 @@
                                 <span class="score-unit">%</span>
                             </div>
                         </div>
-                        <div class="score-level" id="scoreLevel">Débutant</div>
+                        <div class="score-level" id="scoreLevel">Explorateur IA</div>
                         <p class="score-description" id="scoreDescription"></p>
+                    </div>
+
+                    <div class="adaptive-explanation" id="adaptiveExplanation" style="display: none;">
+                        <div class="adaptive-icon">ℹ️</div>
+                        <div class="adaptive-content">
+                            <p class="adaptive-text">
+                                Ce questionnaire est adaptatif : certaines questions avancées n'ont pas été posées car elles nécessitent que les fondamentaux soient d'abord en place. Cette approche permet de se concentrer sur les priorités de votre organisation.
+                            </p>
+                        </div>
                     </div>
 
                     <div class="charts-grid">

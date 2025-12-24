@@ -11,20 +11,26 @@
     "global": [
       {
         "id": "beginner",
-        "label": "Débutant",
+        "label": "Explorateur IA",
         "min_score": 0,
         "max_score": 33
       },
       {
         "id": "intermediate",
-        "label": "Intermédiaire",
+        "label": "Structuration IA",
         "min_score": 34,
         "max_score": 66
       },
       {
         "id": "advanced",
-        "label": "Avancé",
+        "label": "Industrialisation IA",
         "min_score": 67,
+        "max_score": 80
+      },
+      {
+        "id": "scale",
+        "label": "Scale IA",
+        "min_score": 81,
         "max_score": 100
       }
     ],
@@ -68,7 +74,7 @@
       "id": "DATA",
       "name": "Données & Gestion",
       "icon": "💾",
-      "weight": 1.0,
+      "weight": 1.5,
       "description": "Qualité, accessibilité et gouvernance des données pour l'IA."
     },
     {
@@ -89,7 +95,7 @@
       "id": "APPS",
       "name": "Applications & Valeur",
       "icon": "🚀",
-      "weight": 1.0,
+      "weight": 1.5,
       "description": "Utilisation de l'IA dans les cas d'usage métier et valeur générée."
     }
   ],
@@ -116,14 +122,14 @@
       },
       {
         "id": "Q101_C",
-        "label": "Oui, une stratégie IA globale existe mais peu suivie.",
+        "label": "Oui, document de stratégie IA formalisé existe mais sans sponsor exécutif identifié ni revues régulières.",
         "score": 3,
         "next_question_id": "Q102",
         "tags": ["strat_globale_peu_suivie"]
       },
       {
         "id": "Q101_D",
-        "label": "Oui, une stratégie IA globale, priorisée et suivie régulièrement.",
+        "label": "Oui, stratégie IA formalisée avec sponsors métiers identifiés, feuille de route priorisée et revues trimestrielles.",
         "score": 4,
         "next_question_id": "Q102",
         "tags": ["strat_globale_forte"]
@@ -151,13 +157,13 @@
       },
       {
         "id": "Q102_C",
-        "label": "Pilotage régulier avec quelques indicateurs clés.",
+        "label": "Pilotage mensuel ou bimensuel avec KPI IA documentés et suivi partiel.",
         "score": 3,
         "next_question_id": "Q103"
       },
       {
         "id": "Q102_D",
-        "label": "Pilotage structuré (comité IA) avec indicateurs de valeur métier, revues trimestrielles.",
+        "label": "Comité IA formel avec membres identifiés, KPI de valeur métier mesurés et revues trimestrielles documentées.",
         "score": 4,
         "next_question_id": "Q103",
         "tags": ["strat_pilotage_fort"]
@@ -185,16 +191,44 @@
       },
       {
         "id": "Q103_C",
-        "label": "La plupart des métiers connaissent la stratégie IA et y voient des opportunités concrètes.",
+        "label": "La plupart des métiers connaissent la stratégie IA via communications régulières et y voient des opportunités concrètes.",
         "score": 3,
         "next_question_id": "Q201"
       },
       {
         "id": "Q103_D",
-        "label": "La stratégie IA est largement partagée, intégrée aux plans d’action des métiers et fait l’objet de co-construction.",
+        "label": "Stratégie IA intégrée dans les plans d'action métiers avec référents IA identifiés par direction et processus de co-construction formalisé.",
+        "score": 4,
+        "next_question_id": "Q104",
+        "tags": ["strat_adoptee"]
+      }
+    ]
+  },
+  "Q104": {
+    "pillar_id": "STRAT",
+    "text": "Existe-t-il un budget IA identifié et budgétisé séparément (hors budget IT général) ?",
+    "help": "Budget spécifiquement alloué pour les projets IA, avec suivi dédié.",
+    "type": "single_choice",
+    "options": [
+      {
+        "id": "Q104_A",
+        "label": "Non, aucun budget IA identifié ou budgétisé séparément.",
+        "score": 0,
+        "next_question_id": "Q201",
+        "tags": ["strat_pas_de_budget"]
+      },
+      {
+        "id": "Q104_B",
+        "label": "Oui, budget IA identifié mais inférieur à 500K€/an ou moins de 15% du budget IT/innovation.",
+        "score": 2,
+        "next_question_id": "Q201"
+      },
+      {
+        "id": "Q104_C",
+        "label": "Oui, budget IA supérieur à 500K€/an ou plus de 15% du budget IT/innovation, avec suivi dédié.",
         "score": 4,
         "next_question_id": "Q201",
-        "tags": ["strat_adoptee"]
+        "tags": ["strat_budget_fort"]
       }
     ]
   },
@@ -219,13 +253,13 @@
         },
         {
           "id": "Q201_C",
-          "label": "Oui, une gouvernance IA existe mais limitée à certains périmètres.",
+          "label": "Oui, processus de gouvernance IA documenté mais limité à certains périmètres avec rôles partiellement définis.",
           "score": 3,
           "next_question_id": "Q202"
         },
         {
           "id": "Q201_D",
-          "label": "Oui, une gouvernance IA formalisée et appliquée à l'échelle de l'organisation.",
+          "label": "Oui, gouvernance IA formalisée avec rôles identifiés (ex: Chief AI Officer), processus de validation documenté et appliqué à l'échelle de l'organisation.",
           "score": 4,
           "next_question_id": "Q202",
           "tags": ["gov_forte"]
@@ -249,20 +283,48 @@
           "id": "Q202_B",
           "label": "Sensibilisation informelle mais pas de cadre défini.",
           "score": 2,
-          "next_question_id": "Q301"
+          "next_question_id": "Q203"
         },
         {
           "id": "Q202_C",
-          "label": "Charte ou lignes directrices IA mises en place, application partielle.",
+          "label": "Charte d'IA responsable documentée et adoptée, avec processus de revue des modèles appliqué partiellement.",
           "score": 3,
-          "next_question_id": "Q301"
+          "next_question_id": "Q203"
         },
         {
           "id": "Q202_D",
-          "label": "Cadre complet : charte éthique, revue systématique des modèles, conformité contrôlée.",
+          "label": "Charte éthique IA formalisée, processus de revue systématique des modèles avant production et contrôles de conformité trimestriels documentés.",
+          "score": 4,
+          "next_question_id": "Q203",
+          "tags": ["ethique_forte"]
+        }
+      ]
+    },
+    "Q203": {
+      "pillar_id": "GOV",
+      "text": "Existe-t-il un comité IA formel (membres identifiés, ordre du jour, procès-verbaux) et à quelle fréquence se réunit-il ?",
+      "help": "Comité de gouvernance IA avec réunions régulières et documentation.",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "Q203_A",
+          "label": "Non, aucun comité IA formel identifié.",
+          "score": 0,
+          "next_question_id": "Q301",
+          "tags": ["gov_pas_de_comite"]
+        },
+        {
+          "id": "Q203_B",
+          "label": "Oui, comité IA formel se réunissant moins de 4 fois par an.",
+          "score": 2,
+          "next_question_id": "Q301"
+        },
+        {
+          "id": "Q203_C",
+          "label": "Oui, comité IA formel se réunissant au moins trimestriellement (4+ fois/an) avec ordre du jour et suivi d'actions.",
           "score": 4,
           "next_question_id": "Q301",
-          "tags": ["ethique_forte"]
+          "tags": ["gov_comite_actif"]
         }
       ]
     },
@@ -287,13 +349,13 @@
     },
     {
       "id": "Q301_C",
-      "label": "Données globalement fiables, avec une gouvernance en place sur les principaux domaines.",
+      "label": "Données globalement fiables avec data stewards identifiés et gouvernance documentée sur les principaux domaines.",
       "score": 3,
       "next_question_id": "Q302"
     },
     {
       "id": "Q301_D",
-      "label": "Données de haute qualité, bien documentées, facilement accessibles via une plateforme centralisée.",
+      "label": "Données de haute qualité documentées dans un catalogue opérationnel, accessibles via plateforme centralisée avec contrôles qualité automatisés.",
       "score": 4,
       "next_question_id": "Q302",
       "tags": ["data_forte"]
@@ -321,13 +383,13 @@
     },
     {
       "id": "Q302_C",
-      "label": "Plateforme centralisée opérationnelle, gouvernance partielle (quelques domaines bien couverts).",
+      "label": "Plateforme centralisée opérationnelle avec data owners identifiés et gouvernance documentée sur quelques domaines clés.",
       "score": 3,
       "next_question_id": "Q303"
     },
     {
       "id": "Q302_D",
-      "label": "Plateforme data d’entreprise, gouvernance complète (qualité, catalogue, sécurité, conformité).",
+      "label": "Plateforme data d'entreprise opérationnelle avec gouvernance complète : catalogue de données, data stewards, contrôles qualité automatisés et audits de conformité réguliers.",
       "score": 4,
       "next_question_id": "Q303",
       "tags": ["data_plateforme_enterprise"]
@@ -355,16 +417,44 @@
     },
     {
       "id": "Q303_C",
-      "label": "Jeux de données IA structurés pour plusieurs cas d’usage, avec une logique de réutilisation.",
+      "label": "Jeux de données IA structurés et versionnés pour plusieurs cas d'usage, avec processus de réutilisation documenté.",
       "score": 3,
       "next_question_id": "Q401"
     },
     {
       "id": "Q303_D",
-      "label": "Datasets, features et historique gérés de façon industrielle (feature store, versioning, politique de réutilisation).",
+      "label": "Feature store opérationnel avec datasets versionnés, politique de réutilisation formalisée et historique géré de façon industrielle.",
+      "score": 4,
+      "next_question_id": "Q304",
+      "tags": ["data_ia_mature"]
+    }
+  ]
+},
+"Q304": {
+  "pillar_id": "DATA",
+  "text": "Quel est le pourcentage de vos sources de données principales qui sont documentées dans un catalogue de données ?",
+  "help": "Sources de données documentées avec métadonnées, glossaire, et accessibles via un catalogue.",
+  "type": "single_choice",
+  "options": [
+    {
+      "id": "Q304_A",
+      "label": "Moins de 30% des sources de données sont documentées dans un catalogue.",
+      "score": 0,
+      "next_question_id": "Q401",
+      "tags": ["data_peu_documente"]
+    },
+    {
+      "id": "Q304_B",
+      "label": "Entre 30% et 70% des sources de données sont documentées dans un catalogue.",
+      "score": 2,
+      "next_question_id": "Q401"
+    },
+    {
+      "id": "Q304_C",
+      "label": "Plus de 70% des sources de données sont documentées dans un catalogue opérationnel.",
       "score": 4,
       "next_question_id": "Q401",
-      "tags": ["data_ia_mature"]
+      "tags": ["data_catalogue_fort"]
     }
   ]
 },
@@ -389,13 +479,13 @@
         },
         {
           "id": "Q401_C",
-          "label": "Plateforme ML ou MLOps partiellement déployée (déploiement répétable).",
+          "label": "Plateforme ML ou MLOps partiellement déployée avec pipeline de déploiement automatisé et processus documenté.",
           "score": 3,
           "next_question_id": "Q402"
         },
         {
           "id": "Q401_D",
-          "label": "Stack IA complète : MLOps, automatisation, monitoring, registry de modèles.",
+          "label": "Stack IA complète opérationnelle : pipeline MLOps automatisé, monitoring en temps réel, registry de modèles centralisé et processus CI/CD documenté.",
           "score": 4,
           "next_question_id": "Q402",
           "tags": ["tech_mature"]
@@ -423,16 +513,44 @@
         },
         {
           "id": "Q402_C",
-          "label": "Infrastructure suffisante pour la plupart des cas d'usage actuels.",
+          "label": "Infrastructure suffisante pour la plupart des cas d'usage actuels avec capacité mesurée et documentée.",
           "score": 3,
           "next_question_id": "Q501"
         },
         {
           "id": "Q402_D",
-          "label": "Infrastructure pensée pour le scale (cloud/hybride, automatisation, gouvernance des accès).",
+          "label": "Infrastructure cloud/hybride scalable avec automatisation des ressources, gouvernance des accès formalisée et monitoring des coûts mensuel.",
+          "score": 4,
+          "next_question_id": "Q403",
+          "tags": ["tech_infra_scale"]
+        }
+      ]
+    },
+    "Q403": {
+      "pillar_id": "TECH",
+      "text": "Existe-t-il un pipeline MLOps en production (automatisation du déploiement, monitoring, retraining) ?",
+      "help": "Pipeline opérationnel permettant le déploiement automatisé et le monitoring des modèles IA en production.",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "Q403_A",
+          "label": "Non, aucun pipeline MLOps en production.",
+          "score": 0,
+          "next_question_id": "Q501",
+          "tags": ["tech_pas_mlops"]
+        },
+        {
+          "id": "Q403_B",
+          "label": "Oui, pipeline MLOps partiel (déploiement ou monitoring, mais pas les deux).",
+          "score": 2,
+          "next_question_id": "Q501"
+        },
+        {
+          "id": "Q403_C",
+          "label": "Oui, pipeline MLOps complet en production (déploiement automatisé, monitoring, retraining).",
           "score": 4,
           "next_question_id": "Q501",
-          "tags": ["tech_infra_scale"]
+          "tags": ["tech_mlops_complet"]
         }
       ]
     },
@@ -457,13 +575,13 @@
         },
         {
           "id": "Q501_C",
-          "label": "Équipe data/IA structurée dans une direction (ex: IT, innovation).",
+          "label": "Équipe data/IA structurée dans une direction avec rôles définis (data scientists, ML engineers) et responsable identifié.",
           "score": 3,
           "next_question_id": "Q502"
         },
         {
           "id": "Q501_D",
-          "label": "Organisation hybride ou centre d'excellence IA, collaborant avec les métiers.",
+          "label": "Centre d'excellence IA formel avec équipe dédiée, responsable identifié (ex: Head of AI), processus de collaboration avec métiers documenté.",
           "score": 4,
           "next_question_id": "Q502",
           "tags": ["org_coe_ia"]
@@ -491,16 +609,44 @@
         },
         {
           "id": "Q502_C",
-          "label": "Programme de formation en place pour certaines populations (ex: managers, équipes tech).",
+          "label": "Programme de formation IA documenté et déployé pour certaines populations (ex: managers, équipes tech) avec sessions régulières.",
           "score": 3,
           "next_question_id": "Q601"
         },
         {
           "id": "Q502_D",
-          "label": "Programme de formation IA à grande échelle, culture IA intégrée dans l'entreprise.",
+          "label": "Programme de formation IA à grande échelle avec parcours certifiants, sessions mensuelles et indicateurs de participation mesurés.",
+          "score": 4,
+          "next_question_id": "Q503",
+          "tags": ["org_formation_forte"]
+        }
+      ]
+    },
+    "Q503": {
+      "pillar_id": "ORG",
+      "text": "Combien de rôles IA dédiés (data scientists, ML engineers, data engineers, product owners IA) sont présents dans votre organisation ?",
+      "help": "Nombre de personnes avec un rôle principalement dédié à l'IA, hors missions occasionnelles.",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "Q503_A",
+          "label": "Moins de 3 rôles IA dédiés.",
+          "score": 0,
+          "next_question_id": "Q601",
+          "tags": ["org_peu_roles"]
+        },
+        {
+          "id": "Q503_B",
+          "label": "Entre 3 et 10 rôles IA dédiés.",
+          "score": 2,
+          "next_question_id": "Q601"
+        },
+        {
+          "id": "Q503_C",
+          "label": "Plus de 10 rôles IA dédiés, organisés en équipe structurée.",
           "score": 4,
           "next_question_id": "Q601",
-          "tags": ["org_formation_forte"]
+          "tags": ["org_equipe_ia_forte"]
         }
       ]
     },
@@ -514,27 +660,55 @@
           "id": "Q601_A",
           "label": "Aucun cas d'usage IA en production (seulement des POC ou expérimentations).",
           "score": 0,
-          "next_question_id": "Q602",
+          "next_question_id": "Q603",
           "tags": ["apps_aucun_prod"]
         },
         {
           "id": "Q601_B",
           "label": "Quelques cas d'usage en production, sur des périmètres limités.",
           "score": 2,
-          "next_question_id": "Q602"
+          "next_question_id": "Q603"
         },
         {
           "id": "Q601_C",
-          "label": "Plusieurs cas d'usage IA déployés dans les principaux métiers.",
+          "label": "Plusieurs cas d'usage IA déployés dans les principaux métiers avec sponsors métiers identifiés.",
           "score": 3,
-          "next_question_id": "Q602"
+          "next_question_id": "Q603"
         },
         {
           "id": "Q601_D",
-          "label": "Portefeuille étendu de cas d'usage IA en production, avec fort impact sur le business.",
+          "label": "Portefeuille étendu de cas d'usage IA en production avec sponsors métiers identifiés, impact mesuré et revues trimestrielles.",
           "score": 4,
-          "next_question_id": null,
+          "next_question_id": "Q603",
           "tags": ["apps_portefeuille_fort"]
+        }
+      ]
+    },
+    "Q603": {
+      "pillar_id": "APPS",
+      "text": "Combien de cas d'usage IA sont actuellement en production (déployés et utilisés par les métiers) ?",
+      "help": "Nombre exact de cas d'usage opérationnels, hors POC et expérimentations.",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "Q603_A",
+          "label": "Aucun cas d'usage en production.",
+          "score": 0,
+          "next_question_id": "Q602",
+          "tags": ["apps_zero_prod"]
+        },
+        {
+          "id": "Q603_B",
+          "label": "Entre 1 et 5 cas d'usage en production.",
+          "score": 2,
+          "next_question_id": "Q602"
+        },
+        {
+          "id": "Q603_C",
+          "label": "Plus de 5 cas d'usage en production, couvrant plusieurs domaines métier.",
+          "score": 4,
+          "next_question_id": "Q602",
+          "tags": ["apps_portefeuille_etendu"]
         }
       ]
     },
@@ -559,13 +733,13 @@
         },
         {
           "id": "Q602_C",
-          "label": "Mesure systématique de quelques indicateurs clés pour les principaux cas d'usage.",
+          "label": "Mesure systématique de KPI métier documentés pour les principaux cas d'usage avec suivi mensuel.",
           "score": 3,
           "next_question_id": null
         },
         {
           "id": "Q602_D",
-          "label": "Cadre complet de mesure de la valeur (ROI, KPI, adoption), intégré au pilotage métier.",
+          "label": "Cadre de mesure de valeur formalisé (ROI, KPI métier, adoption) avec dashboard opérationnel, revues trimestrielles et intégration au pilotage métier.",
           "score": 4,
           "next_question_id": null,
           "tags": ["apps_valeur_mesuree_fort"]

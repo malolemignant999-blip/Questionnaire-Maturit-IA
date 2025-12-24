@@ -29,13 +29,17 @@ const elements = {
     scoreLevel: document.getElementById('scoreLevel'),
     scoreDescription: document.getElementById('scoreDescription'),
     detailsList: document.getElementById('detailsList'),
-    recommendationsList: document.getElementById('recommendationsList')
+    recommendationsList: document.getElementById('recommendationsList'),
+    reliabilityBadge: document.getElementById('reliabilityBadge'),
+    reliabilityText: document.getElementById('reliabilityText'),
+    reliabilityIndicator: document.getElementById('reliabilityIndicator'),
+    adaptiveExplanation: document.getElementById('adaptiveExplanation')
 };
 
 // ===== Initialize Application =====
 async function init() {
     try {
-        const response = await fetch('data/questionnaire.json');
+        const response = await fetch('questionnaire.json');
         questionnaireData = await response.json();
         setupEventListeners();
         renderPillarProgress();
@@ -265,14 +269,14 @@ function updatePillarProgress() {
 
 function getPillarColor(pillarId) {
     const colors = {
-        'STRAT': '#8b5cf6',
-        'GOV': '#06b6d4',
-        'DATA': '#22c55e',
-        'TECH': '#f59e0b',
-        'ORG': '#ec4899',
-        'APPS': '#3b82f6'
+        'STRAT': '#E05A2A',
+        'GOV': '#1F2A44',
+        'DATA': '#E05A2A',
+        'TECH': '#1F2A44',
+        'ORG': '#E05A2A',
+        'APPS': '#1F2A44'
     };
-    return colors[pillarId] || '#8b5cf6';
+    return colors[pillarId] || '#E05A2A';
 }
 
 // ===== Results =====
@@ -281,6 +285,8 @@ function showResults() {
     elements.progressIndicator.classList.remove('visible');
     
     const results = calculateResults();
+    renderReliability(results);
+    renderAdaptiveExplanation(results);
     renderScoreCard(results);
     renderCharts(results);
     renderDetails(results);
@@ -302,7 +308,8 @@ function calculateResults() {
                 maxScore: 0,
                 percentage: 0,
                 level: 'low',
-                questionsAnswered: 0
+                questionsAnswered: 0,
+                weight: pillar.weight || 1.0
             };
         }
         
@@ -322,16 +329,19 @@ function calculateResults() {
             score: totalScore,
             maxScore,
             percentage,
-            level: pillarLevel?.id || 'low',
-            levelLabel: pillarLevel?.label || 'Faible',
-            questionsAnswered
+                level: pillarLevel?.id || 'low',
+                levelLabel: pillarLevel?.label || 'Faible',
+                questionsAnswered,
+                weight: pillar.weight || 1.0
         };
     });
     
-    // Calculer le score global
-    const totalScore = pillarResults.reduce((sum, p) => sum + p.score, 0);
-    const totalMaxScore = pillarResults.reduce((sum, p) => sum + p.maxScore, 0);
-    const overallPercentage = totalMaxScore > 0 ? Math.round((totalScore / totalMaxScore) * 100) : 0;
+    // Calculer le score global avec pondération par pilier
+    // Les piliers DATA et APPS ont un poids de 1.5, les autres 1.0
+    // Le score global est calculé comme : (somme des scores pondérés) / (somme des maxScores pondérés) * 100
+    const totalScoreWeighted = pillarResults.reduce((sum, p) => sum + (p.score * p.weight), 0);
+    const totalMaxScoreWeighted = pillarResults.reduce((sum, p) => sum + (p.maxScore * p.weight), 0);
+    const overallPercentage = totalMaxScoreWeighted > 0 ? Math.round((totalScoreWeighted / totalMaxScoreWeighted) * 100) : 0;
     
     // Déterminer le niveau global
     const globalLevel = questionnaireData.levels.global.find(
@@ -341,16 +351,69 @@ function calculateResults() {
     // Collecter tous les tags
     const allTags = Object.values(answers).flatMap(a => a.tags || []);
     
+    // Calculer l'indicateur de fiabilité du diagnostic
+    const totalQuestionsAnswered = Object.keys(answers).length;
+    const pillarsCovered = pillarResults.filter(p => p.questionsAnswered > 0).length;
+    const isReliable = totalQuestionsAnswered >= 10 && pillarsCovered >= 5;
+    const reliability = {
+        level: isReliable ? 'reliable' : 'partial',
+        label: isReliable ? 'Fiable' : 'Partiel',
+        totalQuestions: totalQuestionsAnswered,
+        pillarsCovered: pillarsCovered
+    };
+    
     return {
         pillars: pillarResults,
-        totalScore,
-        totalMaxScore,
+        totalScore: totalScoreWeighted,
+        totalMaxScore: totalMaxScoreWeighted,
         overallPercentage,
         globalLevel,
-        tags: allTags
+        tags: allTags,
+        reliability
     };
 }
 
+function renderReliability(results) {
+    const reliability = results.reliability;
+    const isReliable = reliability.level === 'reliable';
+    
+    // Mettre à jour le badge
+    elements.reliabilityBadge.textContent = reliability.label;
+    elements.reliabilityBadge.className = `reliability-badge ${isReliable ? 'reliable' : 'partial'}`;
+    
+    // Mettre à jour le texte explicatif
+    if (isReliable) {
+        elements.reliabilityText.textContent = `${reliability.totalQuestions} questions répondues sur ${reliability.pillarsCovered} piliers couverts.`;
+    } else {
+        const missingQuestions = Math.max(0, 10 - reliability.totalQuestions);
+        const missingPillars = Math.max(0, 5 - reliability.pillarsCovered);
+        let explanation = '';
+        if (missingQuestions > 0 && missingPillars > 0) {
+            explanation = `${reliability.totalQuestions} questions sur ${reliability.pillarsCovered} piliers. Pour un diagnostic fiable : ${missingQuestions} questions et ${missingPillars} pilier(s) supplémentaire(s).`;
+        } else if (missingQuestions > 0) {
+            explanation = `${reliability.totalQuestions} questions sur ${reliability.pillarsCovered} piliers. Pour un diagnostic fiable : ${missingQuestions} question(s) supplémentaire(s).`;
+        } else {
+            explanation = `${reliability.totalQuestions} questions sur ${reliability.pillarsCovered} piliers. Pour un diagnostic fiable : ${missingPillars} pilier(s) supplémentaire(s).`;
+        }
+        elements.reliabilityText.textContent = explanation;
+    }
+    
+    // Afficher l'indicateur
+    elements.reliabilityIndicator.style.display = 'flex';
+}
+
+function renderAdaptiveExplanation(results) {
+    // Calculer le nombre total de questions possibles dans le questionnaire
+    const totalQuestionsPossible = Object.keys(questionnaireData.questions).length;
+    const questionsAnswered = results.reliability.totalQuestions;
+    
+    // Afficher l'explication seulement si toutes les questions n'ont pas été posées
+    if (questionsAnswered < totalQuestionsPossible) {
+        elements.adaptiveExplanation.style.display = 'flex';
+    } else {
+        elements.adaptiveExplanation.style.display = 'none';
+    }
+}
 function renderScoreCard(results) {
     // Animate score number
     animateValue(elements.scoreNumber, 0, results.overallPercentage, 1500);
@@ -365,19 +428,21 @@ function renderScoreCard(results) {
     
     // Update level
     const levelColors = {
-        'beginner': '#ef4444',
-        'intermediate': '#f59e0b',
-        'advanced': '#22c55e'
+        'beginner': '#E05A2A',
+        'intermediate': '#E05A2A',
+        'advanced': '#1F2A44',
+        'scale': '#1F2A44'
     };
     
-    elements.scoreLevel.textContent = results.globalLevel?.label || 'Débutant';
-    elements.scoreLevel.style.background = levelColors[results.globalLevel?.id] || '#ef4444';
+    elements.scoreLevel.textContent = results.globalLevel?.label || 'Explorateur IA';
+    elements.scoreLevel.style.background = levelColors[results.globalLevel?.id] || '#E05A2A';
     
     // Description basée sur le niveau
     const descriptions = {
-        'beginner': "Votre organisation débute son parcours IA. Les fondations sont à construire pour développer une maturité durable.",
-        'intermediate': "Votre organisation a posé les bases de l'IA. Il est temps d'accélérer et d'industrialiser vos pratiques.",
-        'advanced': "Votre organisation a atteint une maturité IA élevée. Continuez à innover et à optimiser vos processus."
+        'beginner': "Votre organisation explore les opportunités de l'IA. Les fondations sont à construire pour développer une transformation durable.",
+        'intermediate': "Votre organisation structure ses pratiques IA. Il est temps d'accélérer et d'industrialiser vos initiatives.",
+        'advanced': "Votre organisation industrialise l'IA à grande échelle. Optimisez vos processus et étendez vos cas d'usage.",
+        'scale': "Votre organisation a atteint un niveau de scale IA. L'IA est intégrée dans votre ADN et génère de la valeur à grande échelle."
     };
     
     elements.scoreDescription.textContent = descriptions[results.globalLevel?.id] || descriptions['beginner'];
@@ -411,8 +476,8 @@ function renderCharts(results) {
         const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
         defs.innerHTML = `
             <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style="stop-color:#8b5cf6"/>
-                <stop offset="100%" style="stop-color:#06b6d4"/>
+                <stop offset="0%" style="stop-color:#E05A2A"/>
+                <stop offset="100%" style="stop-color:#E05A2A"/>
             </linearGradient>
         `;
         svg.insertBefore(defs, svg.firstChild);
@@ -436,13 +501,13 @@ function renderCharts(results) {
             datasets: [{
                 label: 'Score',
                 data: activePillars.map(p => p.percentage),
-                backgroundColor: 'rgba(139, 92, 246, 0.2)',
-                borderColor: 'rgba(139, 92, 246, 1)',
+                backgroundColor: 'rgba(224, 90, 42, 0.2)',
+                borderColor: '#E05A2A',
                 borderWidth: 2,
                 pointBackgroundColor: activePillars.map(p => getPillarColor(p.id)),
                 pointBorderColor: '#fff',
                 pointHoverBackgroundColor: '#fff',
-                pointHoverBorderColor: 'rgba(139, 92, 246, 1)',
+                pointHoverBorderColor: '#E05A2A',
                 pointRadius: 6
             }]
         },
@@ -455,18 +520,18 @@ function renderCharts(results) {
                     max: 100,
                     ticks: {
                         stepSize: 25,
-                        color: '#71717a',
+                        color: '#9CA3AF',
                         backdropColor: 'transparent',
                         font: { size: 10 }
                     },
                     grid: {
-                        color: 'rgba(255, 255, 255, 0.08)'
+                        color: '#E5E7EB'
                     },
                     angleLines: {
-                        color: 'rgba(255, 255, 255, 0.08)'
+                        color: '#E5E7EB'
                     },
                     pointLabels: {
-                        color: '#a1a1aa',
+                        color: '#1F2A44',
                         font: {
                             family: 'Outfit',
                             size: 11
@@ -510,16 +575,16 @@ function renderCharts(results) {
                     beginAtZero: true,
                     max: 100,
                     ticks: {
-                        color: '#71717a',
+                        color: '#9CA3AF',
                         callback: value => `${value}%`
                     },
                     grid: {
-                        color: 'rgba(255, 255, 255, 0.08)'
+                        color: '#E5E7EB'
                     }
                 },
                 x: {
                     ticks: {
-                        color: '#a1a1aa',
+                        color: '#1F2A44',
                         font: {
                             size: 20
                         }
@@ -552,7 +617,7 @@ function renderCharts(results) {
 function renderDetails(results) {
     elements.detailsList.innerHTML = results.pillars.map(pillar => {
         const levelClass = pillar.level;
-        const levelColors = { 'low': '#ef4444', 'mid': '#f59e0b', 'high': '#22c55e' };
+        const levelColors = { 'low': '#E05A2A', 'mid': '#E05A2A', 'high': '#1F2A44' };
         
         return `
             <div class="detail-item">
@@ -608,7 +673,7 @@ function renderRecommendations(results) {
                 recommendations.push({
                     pillar: pillar?.name || 'Général',
                     pillarIcon: pillar?.icon || '💡',
-                    pillarColor: pillar ? getPillarColor(pillar.id) : '#8b5cf6',
+                    pillarColor: pillar ? getPillarColor(pillar.id) : '#E05A2A',
                     text: rec,
                     priority: 0 // Tags = haute priorité
                 });
@@ -643,8 +708,7 @@ function exportResults() {
     let exportText = `═══════════════════════════════════════════════════════════════\n`;
     exportText += `           DIAGNOSTIC DE MATURITÉ IA - RÉSULTATS\n`;
     exportText += `═══════════════════════════════════════════════════════════════\n\n`;
-    exportText += `📊 SCORE GLOBAL: ${results.overallPercentage}%\n`;
-    exportText += `📈 NIVEAU: ${results.globalLevel?.label || 'Débutant'}\n\n`;
+    exportText += `📈 NIVEAU: ${results.globalLevel?.label || 'Explorateur IA'}\n\n`;
     
     exportText += `───────────────────────────────────────────────────────────────\n`;
     exportText += `                    SCORES PAR PILIER\n`;
