@@ -1,0 +1,690 @@
+{
+  "version": "1.0.0",
+  "language": "fr",
+  "metadata": {
+    "name": "Diagnostic de maturité IA",
+    "description": "Questionnaire adaptatif pour évaluer la maturité IA d'une organisation sur 6 piliers, avec scoring et recommandations.",
+    "max_questions_per_run": 15,
+    "entry_question_id": "Q101"
+  },
+  "levels": {
+    "global": [
+      {
+        "id": "beginner",
+        "label": "Débutant",
+        "min_score": 0,
+        "max_score": 33
+      },
+      {
+        "id": "intermediate",
+        "label": "Intermédiaire",
+        "min_score": 34,
+        "max_score": 66
+      },
+      {
+        "id": "advanced",
+        "label": "Avancé",
+        "min_score": 67,
+        "max_score": 100
+      }
+    ],
+    "pillar": [
+      {
+        "id": "low",
+        "label": "Faible",
+        "min_score": 0,
+        "max_score": 39
+      },
+      {
+        "id": "mid",
+        "label": "Moyen",
+        "min_score": 40,
+        "max_score": 69
+      },
+      {
+        "id": "high",
+        "label": "Élevé",
+        "min_score": 70,
+        "max_score": 100
+      }
+    ]
+  },
+  "pillars": [
+    {
+      "id": "STRAT",
+      "name": "Stratégie & Vision",
+      "icon": "🎯",
+      "weight": 1.0,
+      "description": "Vision, objectifs et feuille de route IA alignés avec la stratégie globale."
+    },
+    {
+      "id": "GOV",
+      "name": "Gouvernance & Éthique",
+      "icon": "⚖️",
+      "weight": 1.0,
+      "description": "Gouvernance, gestion des risques et IA responsable (éthique, conformité, transparence)."
+    },
+    {
+      "id": "DATA",
+      "name": "Données & Gestion",
+      "icon": "💾",
+      "weight": 1.0,
+      "description": "Qualité, accessibilité et gouvernance des données pour l'IA."
+    },
+    {
+      "id": "TECH",
+      "name": "Technologie & Infrastructure",
+      "icon": "⚙️",
+      "weight": 1.0,
+      "description": "Plateformes, outils, MLOps et infrastructure nécessaires pour développer et déployer l'IA."
+    },
+    {
+      "id": "ORG",
+      "name": "Organisation & Compétences",
+      "icon": "👥",
+      "weight": 1.0,
+      "description": "Rôles, équipes, compétences et culture favorisant l'adoption de l'IA."
+    },
+    {
+      "id": "APPS",
+      "name": "Applications & Valeur",
+      "icon": "🚀",
+      "weight": 1.0,
+      "description": "Utilisation de l'IA dans les cas d'usage métier et valeur générée."
+    }
+  ],
+"questions": {
+  "Q101": {
+    "pillar_id": "STRAT",
+    "text": "Disposez-vous d’une stratégie IA formalisée et alignée sur votre stratégie d’entreprise ?",
+    "help": "Par exemple : document de stratégie IA, priorisation des cas d’usage, objectifs chiffrés.",
+    "type": "single_choice",
+    "options": [
+      {
+        "id": "Q101_A",
+        "label": "Non, aucune stratégie IA formalisée.",
+        "score": 0,
+        "next_question_id": "Q201",
+        "tags": ["strat_absente"]
+      },
+      {
+        "id": "Q101_B",
+        "label": "Oui, mais limitée à quelques initiatives locales.",
+        "score": 2,
+        "next_question_id": "Q102",
+        "tags": ["strat_partielle"]
+      },
+      {
+        "id": "Q101_C",
+        "label": "Oui, une stratégie IA globale existe mais peu suivie.",
+        "score": 3,
+        "next_question_id": "Q102",
+        "tags": ["strat_globale_peu_suivie"]
+      },
+      {
+        "id": "Q101_D",
+        "label": "Oui, une stratégie IA globale, priorisée et suivie régulièrement.",
+        "score": 4,
+        "next_question_id": "Q102",
+        "tags": ["strat_globale_forte"]
+      }
+    ]
+  },
+  "Q102": {
+    "pillar_id": "STRAT",
+    "text": "Comment la stratégie IA est-elle pilotée et revue ?",
+    "help": "Comité de pilotage, revue périodique, indicateurs de succès, articulation avec les métiers.",
+    "type": "single_choice",
+    "options": [
+      {
+        "id": "Q102_A",
+        "label": "Aucun pilotage spécifique, la stratégie IA reste théorique.",
+        "score": 0,
+        "next_question_id": "Q201",
+        "tags": ["strat_pilotage_faible"]
+      },
+      {
+        "id": "Q102_B",
+        "label": "Pilotage occasionnel, sans indicateurs clairs.",
+        "score": 1,
+        "next_question_id": "Q103"
+      },
+      {
+        "id": "Q102_C",
+        "label": "Pilotage régulier avec quelques indicateurs clés.",
+        "score": 3,
+        "next_question_id": "Q103"
+      },
+      {
+        "id": "Q102_D",
+        "label": "Pilotage structuré (comité IA) avec indicateurs de valeur métier, revues trimestrielles.",
+        "score": 4,
+        "next_question_id": "Q103",
+        "tags": ["strat_pilotage_fort"]
+      }
+    ]
+  },
+  "Q103": {
+    "pillar_id": "STRAT",
+    "text": "Dans quelle mesure la stratégie IA est-elle comprise et adoptée par les métiers ?",
+    "help": "Communication, alignement des feuilles de route métiers, appropriation par les directions opérationnelles.",
+    "type": "single_choice",
+    "options": [
+      {
+        "id": "Q103_A",
+        "label": "Elle est peu connue ou perçue comme un sujet purement IT/innovation.",
+        "score": 0,
+        "next_question_id": "Q201",
+        "tags": ["strat_non_diffusee"]
+      },
+      {
+        "id": "Q103_B",
+        "label": "Quelques métiers clés sont impliqués mais l’appropriation reste partielle.",
+        "score": 2,
+        "next_question_id": "Q201"
+      },
+      {
+        "id": "Q103_C",
+        "label": "La plupart des métiers connaissent la stratégie IA et y voient des opportunités concrètes.",
+        "score": 3,
+        "next_question_id": "Q201"
+      },
+      {
+        "id": "Q103_D",
+        "label": "La stratégie IA est largement partagée, intégrée aux plans d’action des métiers et fait l’objet de co-construction.",
+        "score": 4,
+        "next_question_id": "Q201",
+        "tags": ["strat_adoptee"]
+      }
+    ]
+  },
+    "Q201": {
+      "pillar_id": "GOV",
+      "text": "Avez-vous une gouvernance spécifique pour les projets IA (rôles, comités, processus de validation) ?",
+      "help": "Ex : comité IA, processus de revue des modèles, validation juridique/compliance.",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "Q201_A",
+          "label": "Non, chaque projet IA est géré au cas par cas.",
+          "score": 0,
+          "next_question_id": "Q301",
+          "tags": ["gov_absente"]
+        },
+        {
+          "id": "Q201_B",
+          "label": "Quelques règles existent mais non formalisées ou peu appliquées.",
+          "score": 2,
+          "next_question_id": "Q202"
+        },
+        {
+          "id": "Q201_C",
+          "label": "Oui, une gouvernance IA existe mais limitée à certains périmètres.",
+          "score": 3,
+          "next_question_id": "Q202"
+        },
+        {
+          "id": "Q201_D",
+          "label": "Oui, une gouvernance IA formalisée et appliquée à l'échelle de l'organisation.",
+          "score": 4,
+          "next_question_id": "Q202",
+          "tags": ["gov_forte"]
+        }
+      ]
+    },
+    "Q202": {
+      "pillar_id": "GOV",
+      "text": "Comment gérez-vous les enjeux d'IA responsable (éthique, biais, transparence, RGPD) ?",
+      "help": "Présence d'une charte, revue d'impact, documentation des modèles, contrôles réguliers.",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "Q202_A",
+          "label": "Aucune démarche spécifique sur ces sujets.",
+          "score": 0,
+          "next_question_id": "Q301",
+          "tags": ["ethique_absente"]
+        },
+        {
+          "id": "Q202_B",
+          "label": "Sensibilisation informelle mais pas de cadre défini.",
+          "score": 2,
+          "next_question_id": "Q301"
+        },
+        {
+          "id": "Q202_C",
+          "label": "Charte ou lignes directrices IA mises en place, application partielle.",
+          "score": 3,
+          "next_question_id": "Q301"
+        },
+        {
+          "id": "Q202_D",
+          "label": "Cadre complet : charte éthique, revue systématique des modèles, conformité contrôlée.",
+          "score": 4,
+          "next_question_id": "Q301",
+          "tags": ["ethique_forte"]
+        }
+      ]
+    },
+    "Q301": {
+  "pillar_id": "DATA",
+  "text": "Comment qualifieriez-vous la qualité et l’accessibilité de vos données pour les projets IA ?",
+  "help": "Complétude, fiabilité, standardisation, accès pour les équipes data/IA.",
+  "type": "single_choice",
+  "options": [
+    {
+      "id": "Q301_A",
+      "label": "Données très fragmentées, qualité faible, difficilement accessibles.",
+      "score": 0,
+      "next_question_id": "Q401",
+      "tags": ["data_fragmentee"]
+    },
+    {
+      "id": "Q301_B",
+      "label": "Qualité et accès variables selon les systèmes, quelques silos importants.",
+      "score": 2,
+      "next_question_id": "Q302"
+    },
+    {
+      "id": "Q301_C",
+      "label": "Données globalement fiables, avec une gouvernance en place sur les principaux domaines.",
+      "score": 3,
+      "next_question_id": "Q302"
+    },
+    {
+      "id": "Q301_D",
+      "label": "Données de haute qualité, bien documentées, facilement accessibles via une plateforme centralisée.",
+      "score": 4,
+      "next_question_id": "Q302",
+      "tags": ["data_forte"]
+    }
+  ]
+},
+"Q302": {
+  "pillar_id": "DATA",
+  "text": "Disposez-vous d’une plateforme data (data lake/warehouse) et de processus de gouvernance des données ?",
+  "help": "Catalogue de données, data stewards, contrôles de qualité automatisés, sécurité et conformité.",
+  "type": "single_choice",
+  "options": [
+    {
+      "id": "Q302_A",
+      "label": "Non, chaque équipe gère ses données dans ses propres outils.",
+      "score": 0,
+      "next_question_id": "Q303",
+      "tags": ["data_pas_de_plateforme"]
+    },
+    {
+      "id": "Q302_B",
+      "label": "Une plateforme existe mais est limitée à certains cas d’usage ou métiers.",
+      "score": 2,
+      "next_question_id": "Q303"
+    },
+    {
+      "id": "Q302_C",
+      "label": "Plateforme centralisée opérationnelle, gouvernance partielle (quelques domaines bien couverts).",
+      "score": 3,
+      "next_question_id": "Q303"
+    },
+    {
+      "id": "Q302_D",
+      "label": "Plateforme data d’entreprise, gouvernance complète (qualité, catalogue, sécurité, conformité).",
+      "score": 4,
+      "next_question_id": "Q303",
+      "tags": ["data_plateforme_enterprise"]
+    }
+  ]
+},
+"Q303": {
+  "pillar_id": "DATA",
+  "text": "Dans quelle mesure vos données sont-elles préparées spécifiquement pour les cas d’usage IA ?",
+  "help": "Jeux de données labellisés, features réutilisables, historique suffisant, versioning des datasets.",
+  "type": "single_choice",
+  "options": [
+    {
+      "id": "Q303_A",
+      "label": "Aucun jeu de données structuré pour l’IA, tout est fait au cas par cas.",
+      "score": 0,
+      "next_question_id": "Q401",
+      "tags": ["data_ia_absente"]
+    },
+    {
+      "id": "Q303_B",
+      "label": "Quelques jeux de données préparés pour certains projets, sans standardisation.",
+      "score": 2,
+      "next_question_id": "Q401"
+    },
+    {
+      "id": "Q303_C",
+      "label": "Jeux de données IA structurés pour plusieurs cas d’usage, avec une logique de réutilisation.",
+      "score": 3,
+      "next_question_id": "Q401"
+    },
+    {
+      "id": "Q303_D",
+      "label": "Datasets, features et historique gérés de façon industrielle (feature store, versioning, politique de réutilisation).",
+      "score": 4,
+      "next_question_id": "Q401",
+      "tags": ["data_ia_mature"]
+    }
+  ]
+},
+    "Q401": {
+      "pillar_id": "TECH",
+      "text": "Quel est votre niveau d'outillage pour développer et déployer des modèles IA/ML ?",
+      "help": "Environnements de dev, outils MLOps, CI/CD, monitoring des modèles.",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "Q401_A",
+          "label": "Projets IA ponctuels voire pas du tout de projets IA, sans outillage standardisé (scripts ad hoc).",
+          "score": 0,
+          "next_question_id": "Q501",
+          "tags": ["tech_ad_hoc"]
+        },
+        {
+          "id": "Q401_B",
+          "label": "Quelques outils partagés (ex: notebooks, IDE) mais sans pipeline complet.",
+          "score": 2,
+          "next_question_id": "Q402"
+        },
+        {
+          "id": "Q401_C",
+          "label": "Plateforme ML ou MLOps partiellement déployée (déploiement répétable).",
+          "score": 3,
+          "next_question_id": "Q402"
+        },
+        {
+          "id": "Q401_D",
+          "label": "Stack IA complète : MLOps, automatisation, monitoring, registry de modèles.",
+          "score": 4,
+          "next_question_id": "Q402",
+          "tags": ["tech_mature"]
+        }
+      ]
+    },
+    "Q402": {
+      "pillar_id": "TECH",
+      "text": "Votre infrastructure supporte-t-elle le passage à l'échelle des cas d'usage IA ?",
+      "help": "Scalabilité cloud/on-prem, gestion des coûts, sécurité, performance.",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "Q402_A",
+          "label": "Non, l'infrastructure est un frein majeur (capacité, sécurité, coûts).",
+          "score": 0,
+          "next_question_id": "Q501",
+          "tags": ["tech_infra_faible"]
+        },
+        {
+          "id": "Q402_B",
+          "label": "Scalabilité possible mais avec beaucoup d'efforts manuels.",
+          "score": 2,
+          "next_question_id": "Q501"
+        },
+        {
+          "id": "Q402_C",
+          "label": "Infrastructure suffisante pour la plupart des cas d'usage actuels.",
+          "score": 3,
+          "next_question_id": "Q501"
+        },
+        {
+          "id": "Q402_D",
+          "label": "Infrastructure pensée pour le scale (cloud/hybride, automatisation, gouvernance des accès).",
+          "score": 4,
+          "next_question_id": "Q501",
+          "tags": ["tech_infra_scale"]
+        }
+      ]
+    },
+    "Q501": {
+      "pillar_id": "ORG",
+      "text": "Disposez-vous d'équipes et de rôles dédiés à la data et à l'IA ?",
+      "help": "Data scientists, data engineers, ML engineers, product owners IA, etc.",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "Q501_A",
+          "label": "Aucun rôle dédié, l'IA est gérée en plus des missions habituelles.",
+          "score": 0,
+          "next_question_id": "Q502",
+          "tags": ["org_pas_dequipe"]
+        },
+        {
+          "id": "Q501_B",
+          "label": "Quelques experts isolés, sans structure claire.",
+          "score": 2,
+          "next_question_id": "Q502"
+        },
+        {
+          "id": "Q501_C",
+          "label": "Équipe data/IA structurée dans une direction (ex: IT, innovation).",
+          "score": 3,
+          "next_question_id": "Q502"
+        },
+        {
+          "id": "Q501_D",
+          "label": "Organisation hybride ou centre d'excellence IA, collaborant avec les métiers.",
+          "score": 4,
+          "next_question_id": "Q502",
+          "tags": ["org_coe_ia"]
+        }
+      ]
+    },
+    "Q502": {
+      "pillar_id": "ORG",
+      "text": "Quel est le niveau de sensibilisation et de formation à l'IA dans l'organisation ?",
+      "help": "Formations, programmes de montée en compétences, culture data/IA.",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "Q502_A",
+          "label": "La majorité des collaborateurs n'a aucune formation ou sensibilisation à l'IA.",
+          "score": 0,
+          "next_question_id": "Q601",
+          "tags": ["org_formation_faible"]
+        },
+        {
+          "id": "Q502_B",
+          "label": "Quelques formations ponctuelles, sans programme structuré.",
+          "score": 2,
+          "next_question_id": "Q601"
+        },
+        {
+          "id": "Q502_C",
+          "label": "Programme de formation en place pour certaines populations (ex: managers, équipes tech).",
+          "score": 3,
+          "next_question_id": "Q601"
+        },
+        {
+          "id": "Q502_D",
+          "label": "Programme de formation IA à grande échelle, culture IA intégrée dans l'entreprise.",
+          "score": 4,
+          "next_question_id": "Q601",
+          "tags": ["org_formation_forte"]
+        }
+      ]
+    },
+    "Q601": {
+      "pillar_id": "APPS",
+      "text": "Quel est votre niveau de déploiement de cas d'usage IA en production ?",
+      "help": "Nombre de cas d'usage opérationnels, couverture des principaux domaines métier.",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "Q601_A",
+          "label": "Aucun cas d'usage IA en production (seulement des POC ou expérimentations).",
+          "score": 0,
+          "next_question_id": "Q602",
+          "tags": ["apps_aucun_prod"]
+        },
+        {
+          "id": "Q601_B",
+          "label": "Quelques cas d'usage en production, sur des périmètres limités.",
+          "score": 2,
+          "next_question_id": "Q602"
+        },
+        {
+          "id": "Q601_C",
+          "label": "Plusieurs cas d'usage IA déployés dans les principaux métiers.",
+          "score": 3,
+          "next_question_id": "Q602"
+        },
+        {
+          "id": "Q601_D",
+          "label": "Portefeuille étendu de cas d'usage IA en production, avec fort impact sur le business.",
+          "score": 4,
+          "next_question_id": null,
+          "tags": ["apps_portefeuille_fort"]
+        }
+      ]
+    },
+    "Q602": {
+      "pillar_id": "APPS",
+      "text": "Mesurez-vous la valeur créée par vos cas d'usage IA (ROI, KPI métier, satisfaction) ?",
+      "help": "Indicateurs de performance, suivi du ROI, boucle de feedback avec les utilisateurs.",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "Q602_A",
+          "label": "Non, nous ne mesurons pas spécifiquement l'impact de l'IA.",
+          "score": 0,
+          "next_question_id": null,
+          "tags": ["apps_valeur_non_mesuree"]
+        },
+        {
+          "id": "Q602_B",
+          "label": "Mesure ponctuelle ou qualitative, sans cadre systématique.",
+          "score": 2,
+          "next_question_id": null
+        },
+        {
+          "id": "Q602_C",
+          "label": "Mesure systématique de quelques indicateurs clés pour les principaux cas d'usage.",
+          "score": 3,
+          "next_question_id": null
+        },
+        {
+          "id": "Q602_D",
+          "label": "Cadre complet de mesure de la valeur (ROI, KPI, adoption), intégré au pilotage métier.",
+          "score": 4,
+          "next_question_id": null,
+          "tags": ["apps_valeur_mesuree_fort"]
+        }
+      ]
+    }
+  },
+  "recommendations": {
+    "by_pillar_level": {
+      "STRAT": {
+        "low": [
+          "Formaliser une feuille de route IA alignée sur la stratégie d'entreprise, avec 3 à 5 cas d'usage prioritaires.",
+          "Nommer un sponsor exécutif (ex: direction générale, COO, CIO) responsable de la vision et des arbitrages IA."
+        ],
+        "mid": [
+          "Renforcer le pilotage de la stratégie IA via un comité dédié et des revues régulières.",
+          "Définir des objectifs chiffrés (KPI) pour chaque cas d'usage IA prioritaire."
+        ],
+        "high": [
+          "Étendre la stratégie IA aux nouveaux domaines métiers et explorer des cas d'usage différenciants.",
+          "Communiquer régulièrement sur les succès IA pour entretenir l'adhésion et la dynamique interne."
+        ]
+      },
+      "GOV": {
+        "low": [
+          "Mettre en place une gouvernance minimale de l'IA : définir qui décide, qui valide et qui opère les projets IA.",
+          "Documenter les risques principaux (biais, conformité, sécurité) pour les premiers cas d'usage IA."
+        ],
+        "mid": [
+          "Formaliser une charte d'IA responsable, adoptée par les équipes data/IA et les métiers.",
+          "Instaurer un processus de revue des modèles (éthique, juridique, compliance) avant mise en production."
+        ],
+        "high": [
+          "Étendre le cadre d'IA responsable à l'ensemble du portefeuille de projets, avec audits réguliers.",
+          "Automatiser autant que possible les contrôles de conformité (logs, alertes, documentation des modèles)."
+        ]
+      },
+      "DATA": {
+        "low": [
+          "Lancer un programme d'amélioration de la qualité des données (profilage, nettoyage, standardisation).",
+          "Identifier les sources de données critiques pour l'IA et travailler à leur centralisation progressive."
+        ],
+        "mid": [
+          "Étendre la plateforme data à de nouveaux domaines, tout en clarifiant les rôles (data owners, data stewards).",
+          "Mettre en place un catalogue de données et des indicateurs de qualité suivis dans le temps."
+        ],
+        "high": [
+          "Optimiser les pipelines de données (temps réel, streaming) pour les cas d'usage IA les plus critiques.",
+          "Explorer des techniques avancées (données synthétiques, fédération) pour enrichir vos modèles IA."
+        ]
+      },
+      "TECH": {
+        "low": [
+          "Standardiser les pratiques de développement IA (outils communs, gestion de versions, revue de code).",
+          "Identifier une première plateforme (cloud ou on-prem) pour centraliser les workloads IA."
+        ],
+        "mid": [
+          "Mettre en place un pipeline MLOps de base (entraînement, déploiement, monitoring).",
+          "Industrialiser le déploiement de modèles IA sur vos principaux cas d'usage."
+        ],
+        "high": [
+          "Automatiser le retraining des modèles critiques et renforcer le monitoring (drift, performances).",
+          "Optimiser les coûts d'infrastructure IA (dimensionnement, réservation de ressources, mutualisation)."
+        ]
+      },
+      "ORG": {
+        "low": [
+          "Identifier des référents IA dans les équipes métier et IT pour initier une communauté de pratique.",
+          "Lancer des actions de sensibilisation à l'IA (webinaires, ateliers) pour démystifier la technologie."
+        ],
+        "mid": [
+          "Structurer une équipe data/IA avec des rôles clairs et des objectifs partagés.",
+          "Mettre en place un programme de formation ciblé (managers, experts, utilisateurs métier)."
+        ],
+        "high": [
+          "Élargir les parcours de carrière autour de l'IA et encourager la mobilité interne vers des rôles data/IA.",
+          "Renforcer la culture d'expérimentation contrôlée (POC rapides, apprentissage sur les échecs)."
+        ]
+      },
+      "APPS": {
+        "low": [
+          "Identifier 2 ou 3 cas d'usage IA à forte valeur et faisabilité raisonnable pour démarrer.",
+          "Éviter de multiplier les POC sans perspective de mise en production ; privilégier quelques projets structurés."
+        ],
+        "mid": [
+          "Étendre les cas d'usage IA aux métiers adjacents en capitalisant sur les succès existants.",
+          "Mettre en place des indicateurs de valeur (gains de temps, revenus, satisfaction) pour chaque cas d'usage."
+        ],
+        "high": [
+          "Rationaliser le portefeuille de cas d'usage IA et prioriser ceux qui apportent le plus de valeur.",
+          "Intégrer systématiquement l'IA dans les décisions de transformation et d'innovation produit."
+        ]
+      }
+    },
+    "by_tag": {
+      "strat_absente": [
+        "Organiser un atelier stratégique avec les parties prenantes clés pour définir la vision IA de l'entreprise."
+      ],
+      "gov_absente": [
+        "Désigner un responsable de la gouvernance IA (ex: Chief Data/AI Officer) chargé de structurer les processus."
+      ],
+      "ethique_absente": [
+        "Initier la rédaction d'une charte d'IA responsable en s'inspirant de standards existants (ex: lignes directrices européennes)."
+      ],
+      "data_fragmentee": [
+        "Cartographier les principales sources de données et identifier les redondances et incohérences."
+      ],
+      "tech_ad_hoc": [
+        "Évaluer les plateformes IA/ML du marché pour sortir d'une logique de scripts isolés."
+      ],
+      "org_pas_dequipe": [
+        "Étudier la création d'une petite équipe data/IA transverse capable de porter les premiers projets stratégiques."
+      ],
+      "apps_aucun_prod": [
+        "Transformer un POC existant en projet candidat à la mise en production en clarifiant les sponsors métier."
+      ],
+      "apps_valeur_non_mesuree": [
+        "Définir au moins 2 indicateurs métier pour chaque cas d'usage IA afin de suivre la valeur créée."
+      ]
+    }
+  }
+}
