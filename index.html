@@ -25,25 +25,43 @@
         <header class="header">
             <a href="./" class="logo-link">
                 <div class="logo">
-                    <img src="https://crossdata.fr/wp-content/uploads/2024/01/logo-crossdata.svg" alt="Cross Data" class="logo-image">
+                    <svg width="180" height="40" viewBox="0 0 180 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Logo moderne avec dégradé bleu et rouge -->
+                        <defs>
+                            <linearGradient id="logoGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#1E40AF;stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="logoGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#EF4444;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#DC2626;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <!-- Icône AI stylisée -->
+                        <circle cx="20" cy="20" r="16" fill="url(#logoGradient1)" opacity="0.9"/>
+                        <path d="M12 20 L20 12 L28 20 L20 28 Z" fill="url(#logoGradient2)"/>
+                        <circle cx="20" cy="20" r="5" fill="white"/>
+                        <!-- Texte -->
+                        <text x="45" y="26" font-family="Outfit, sans-serif" font-size="20" font-weight="700" fill="#1F2A44">Maturité IA</text>
+                    </svg>
                 </div>
             </a>
             <div class="header-right">
                 <div class="cool-logo">
                     <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="30" cy="30" r="28" fill="url(#gradient1)" opacity="0.9"/>
-                        <path d="M15 30 L30 15 L45 30 L30 45 Z" fill="url(#gradient2)"/>
-                        <circle cx="30" cy="30" r="8" fill="white"/>
                         <defs>
-                            <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <linearGradient id="coolGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
                                 <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1" />
                                 <stop offset="100%" style="stop-color:#1E40AF;stop-opacity:1" />
                             </linearGradient>
-                            <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <linearGradient id="coolGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
                                 <stop offset="0%" style="stop-color:#EF4444;stop-opacity:1" />
                                 <stop offset="100%" style="stop-color:#DC2626;stop-opacity:1" />
                             </linearGradient>
                         </defs>
+                        <circle cx="30" cy="30" r="28" fill="url(#coolGradient1)" opacity="0.9"/>
+                        <path d="M15 30 L30 15 L45 30 L30 45 Z" fill="url(#coolGradient2)"/>
+                        <circle cx="30" cy="30" r="8" fill="white"/>
                     </svg>
                 </div>
                 <div class="progress-indicator" id="progressIndicator">
@@ -62,135 +80,51 @@
                 <div class="welcome-content">
                     <div class="welcome-badge">Évaluation Entreprise</div>
                     <h1 class="welcome-title">
-                        Identifiez votre niveau de<br>
+                        Diagnostic de<br>
                         <span class="gradient-text">Maturité IA</span>
                     </h1>
-                    <p class="welcome-subtitle">
-                        Identifiez votre niveau de maturité IA et priorisez les actions à fort impact
-                    </p>
                     <p class="welcome-description">
-                        Évaluez votre organisation sur 6 piliers stratégiques et recevez des recommandations personnalisées pour accélérer votre transformation.
+                        Évaluez la maturité IA de votre organisation sur 6 piliers stratégiques 
+                        et recevez des recommandations personnalisées pour accélérer votre transformation.
                     </p>
-                    <div class="pillars-preview" role="list">
-                        <div class="pillar-card" data-pillar="strategie" role="listitem" tabindex="0" aria-label="Pilier Stratégie : Vision et feuille de route IA de l'organisation">
-                            <div class="pillar-icon" aria-hidden="true">🎯</div>
-                            <div class="pillar-content">
-                                <div class="pillar-name">Stratégie</div>
-                                <div class="pillar-tooltip">Vision et feuille de route IA de l'organisation</div>
-                            </div>
-                        </div>
-                        <div class="pillar-card" data-pillar="gouvernance" role="listitem" tabindex="0" aria-label="Pilier Gouvernance : Cadre éthique, réglementaire et de contrôle">
-                            <div class="pillar-icon" aria-hidden="true">⚖️</div>
-                            <div class="pillar-content">
-                                <div class="pillar-name">Gouvernance</div>
-                                <div class="pillar-tooltip">Cadre éthique, réglementaire et de contrôle</div>
-                            </div>
-                        </div>
-                        <div class="pillar-card" data-pillar="donnees" role="listitem" tabindex="0" aria-label="Pilier Données : Qualité, accessibilité et gestion des données">
-                            <div class="pillar-icon" aria-hidden="true">💾</div>
-                            <div class="pillar-content">
-                                <div class="pillar-name">Données</div>
-                                <div class="pillar-tooltip">Qualité, accessibilité et gestion des données</div>
-                            </div>
-                        </div>
-                        <div class="pillar-card" data-pillar="technologie" role="listitem" tabindex="0" aria-label="Pilier Technologie : Infrastructure et outils IA disponibles">
-                            <div class="pillar-icon" aria-hidden="true">⚙️</div>
-                            <div class="pillar-content">
-                                <div class="pillar-name">Technologie</div>
-                                <div class="pillar-tooltip">Infrastructure et outils IA disponibles</div>
-                            </div>
-                        </div>
-                        <div class="pillar-card" data-pillar="organisation" role="listitem" tabindex="0" aria-label="Pilier Organisation : Compétences, rôles et culture IA">
-                            <div class="pillar-icon" aria-hidden="true">👥</div>
-                            <div class="pillar-content">
-                                <div class="pillar-name">Organisation</div>
-                                <div class="pillar-tooltip">Compétences, rôles et culture IA</div>
-                            </div>
-                        </div>
-                        <div class="pillar-card" data-pillar="applications" role="listitem" tabindex="0" aria-label="Pilier Applications : Cas d'usage IA en production">
-                            <div class="pillar-icon" aria-hidden="true">🚀</div>
-                            <div class="pillar-content">
-                                <div class="pillar-name">Applications</div>
-                                <div class="pillar-tooltip">Cas d'usage IA en production</div>
-                            </div>
-                        </div>
+                    <div class="pillars-preview">
+                        <div class="pillar-tag"><span>🎯</span> Stratégie</div>
+                        <div class="pillar-tag"><span>⚖️</span> Gouvernance</div>
+                        <div class="pillar-tag"><span>💾</span> Données</div>
+                        <div class="pillar-tag"><span>⚙️</span> Technologie</div>
+                        <div class="pillar-tag"><span>👥</span> Organisation</div>
+                        <div class="pillar-tag"><span>🚀</span> Applications</div>
                     </div>
                     <div class="welcome-features">
-                        <div class="feature-card">
-                            <div class="feature-icon-wrapper">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M9 11l3 3L22 4M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
-                                </svg>
-                            </div>
-                            <div class="feature-text">
-                                <div class="feature-title">~12 questions</div>
-                                <div class="feature-subtitle">Évaluation complète</div>
-                            </div>
+                        <div class="feature">
+                            <span class="feature-icon">📊</span>
+                            <span>~12 questions</span>
                         </div>
-                        <div class="feature-card">
-                            <div class="feature-icon-wrapper">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="12" cy="12" r="10"/>
-                                    <polyline points="12 6 12 12 16 14"/>
-                                </svg>
-                            </div>
-                            <div class="feature-text">
-                                <div class="feature-title">5-10 minutes</div>
-                                <div class="feature-subtitle">Résultats immédiats</div>
-                            </div>
+                        <div class="feature">
+                            <span class="feature-icon">⏱️</span>
+                            <span>5-10 minutes</span>
                         </div>
-                        <div class="feature-card">
-                            <div class="feature-icon-wrapper">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                                </svg>
-                            </div>
-                            <div class="feature-text">
-                                <div class="feature-title">Recommandations</div>
-                                <div class="feature-subtitle">Actions prioritaires</div>
-                            </div>
+                        <div class="feature">
+                            <span class="feature-icon">💡</span>
+                            <span>Recommandations</span>
                         </div>
                     </div>
-                    <div class="cta-group">
-                        <button class="btn-primary" id="startBtn">
-                            <span>Démarrer le diagnostic</span>
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M5 12h14M12 5l7 7-7 7"/>
-                            </svg>
-                        </button>
-                        <button class="btn-secondary" id="methodologyBtn">
-                            <span>Voir la méthodologie</span>
-                        </button>
-                    </div>
+                    <button class="btn-primary" id="startBtn">
+                        <span>Démarrer le diagnostic</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
                 </div>
                 <div class="welcome-visual">
                     <div class="visual-card">
-                        <div class="maturity-journey">
-                            <div class="journey-title">Parcours de maturité</div>
-                            <div class="journey-steps">
-                                <div class="journey-step step-1">
-                                    <div class="step-circle">1</div>
-                                    <div class="step-label">Explorateur</div>
-                                </div>
-                                <div class="journey-line"></div>
-                                <div class="journey-step step-2">
-                                    <div class="step-circle">2</div>
-                                    <div class="step-label">Initiateur</div>
-                                </div>
-                                <div class="journey-line"></div>
-                                <div class="journey-step step-3">
-                                    <div class="step-circle">3</div>
-                                    <div class="step-label">Avancé</div>
-                                </div>
-                                <div class="journey-line"></div>
-                                <div class="journey-step step-4">
-                                    <div class="step-circle">4</div>
-                                    <div class="step-label">Expert</div>
-                                </div>
-                            </div>
-                            <div class="journey-indicator">
-                                <div class="indicator-dot"></div>
-                            </div>
+                        <div class="hexagon-grid">
+                            <div class="hex hex-1">🎯</div>
+                            <div class="hex hex-2">⚖️</div>
+                            <div class="hex hex-3">💾</div>
+                            <div class="hex hex-4">⚙️</div>
+                            <div class="hex hex-5">👥</div>
+                            <div class="hex hex-6">🚀</div>
                         </div>
                     </div>
                 </div>

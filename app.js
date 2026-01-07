@@ -56,14 +56,6 @@ function setupEventListeners() {
     elements.finishBtn.addEventListener('click', showResults);
     elements.restartBtn.addEventListener('click', restartQuestionnaire);
     elements.exportBtn.addEventListener('click', exportResults);
-    
-    // Bouton méthodologie
-    const methodologyBtn = document.getElementById('methodologyBtn');
-    if (methodologyBtn) {
-        methodologyBtn.addEventListener('click', () => {
-            alert('La méthodologie du diagnostic de maturité IA est basée sur 6 piliers stratégiques : Stratégie, Gouvernance, Données, Technologie, Organisation et Applications. Chaque pilier est évalué selon plusieurs critères pour déterminer votre niveau de maturité global.');
-        });
-    }
 }
 
 // ===== Screen Navigation =====
@@ -337,10 +329,10 @@ function calculateResults() {
             score: totalScore,
             maxScore,
             percentage,
-                level: pillarLevel?.id || 'low',
-                levelLabel: pillarLevel?.label || 'Faible',
-                questionsAnswered,
-                weight: pillar.weight || 1.0
+            level: pillarLevel?.id || 'low',
+            levelLabel: pillarLevel?.label || 'Faible',
+            questionsAnswered,
+            weight: pillar.weight || 1.0
         };
     });
     
