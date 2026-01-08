@@ -48,6 +48,16 @@ async function init() {
     }
 }
 
+// ===== Pillar Explanations =====
+const pillarExplanations = {
+    strategie: "Définit la vision, les priorités et les cas d'usage IA à fort impact business. Sans stratégie claire, l'IA reste expérimentale et ne crée pas de valeur durable.",
+    gouvernance: "Assure un cadre de décision, de responsabilité et de conformité. Une gouvernance solide permet de déployer l'IA à l'échelle en maîtrisant les risques réglementaires et éthiques.",
+    donnees: "Conditionne directement la performance des solutions IA. Des données fiables, accessibles et bien structurées sont le socle de toute maturité IA.",
+    technologie: "Fournit les outils, infrastructures et modèles adaptés aux besoins. Une technologie maîtrisée permet de passer du test à l'industrialisation.",
+    organisation: "Mesure la capacité des équipes à adopter l'IA. Compétences, culture et conduite du changement sont clés pour transformer les usages.",
+    applications: "Traduit l'IA en usages concrets et mesurables. Ce pilier reflète le niveau réel de création de valeur par l'IA dans les métiers."
+};
+
 // ===== Event Listeners =====
 function setupEventListeners() {
     elements.startBtn.addEventListener('click', startQuestionnaire);
@@ -56,6 +66,65 @@ function setupEventListeners() {
     elements.finishBtn.addEventListener('click', showResults);
     elements.restartBtn.addEventListener('click', restartQuestionnaire);
     elements.exportBtn.addEventListener('click', exportResults);
+    
+    // Event listeners pour les piliers interactifs
+    setupPillarInteractivity();
+}
+
+// ===== Pillar Interactivity =====
+function setupPillarInteractivity() {
+    const pillarTags = document.querySelectorAll('.pillar-tag[data-pillar]');
+    const explanationContainer = document.getElementById('pillarExplanation');
+    const explanationText = document.getElementById('pillarExplanationText');
+    
+    pillarTags.forEach(tag => {
+        // Gestion du clic
+        tag.addEventListener('click', function() {
+            const pillarId = this.dataset.pillar;
+            showPillarExplanation(pillarId);
+        });
+        
+        // Gestion de la touche Entrée pour l'accessibilité
+        tag.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                const pillarId = this.dataset.pillar;
+                showPillarExplanation(pillarId);
+            }
+        });
+    });
+}
+
+// Fonction pour afficher l'explication d'un pilier
+function showPillarExplanation(pillarId) {
+    const explanationContainer = document.getElementById('pillarExplanation');
+    const explanationText = document.getElementById('pillarExplanationText');
+    const pillarTags = document.querySelectorAll('.pillar-tag[data-pillar]');
+    
+    // Retirer l'état actif de tous les piliers
+    pillarTags.forEach(tag => {
+        tag.classList.remove('active');
+    });
+    
+    // Ajouter l'état actif au pilier cliqué
+    const activeTag = document.querySelector(`.pillar-tag[data-pillar="${pillarId}"]`);
+    if (activeTag) {
+        activeTag.classList.add('active');
+    }
+    
+    // Afficher le texte explicatif avec animation
+    if (pillarExplanations[pillarId]) {
+        explanationText.textContent = pillarExplanations[pillarId];
+        
+        // Animation fade-in
+        explanationContainer.style.display = 'block';
+        explanationContainer.style.opacity = '0';
+        setTimeout(() => {
+            explanationContainer.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            explanationContainer.style.opacity = '1';
+            explanationContainer.style.transform = 'translateY(0)';
+        }, 10);
+    }
 }
 
 // ===== Screen Navigation =====

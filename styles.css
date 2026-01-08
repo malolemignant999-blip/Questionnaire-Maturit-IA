@@ -415,8 +415,48 @@ body {
     box-shadow: 0 4px 8px rgba(224, 90, 42, 0.15);
 }
 
+.pillar-tag.active {
+    border-color: var(--color-primary);
+    background: linear-gradient(135deg, #FFF5F2 0%, #FFEBE5 100%);
+    color: var(--color-primary);
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(224, 90, 42, 0.25);
+    transform: translateY(-2px);
+}
+
+.pillar-tag:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
 .pillar-tag span {
     font-size: 1rem;
+}
+
+/* Zone d'explication des piliers */
+.pillar-explanation {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #F8FAFC 0%, #FFFFFF 100%);
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    min-height: 80px;
+}
+
+.pillar-explanation-content {
+    position: relative;
+}
+
+.pillar-explanation-content p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-primary);
+    margin: 0;
+    font-weight: 400;
 }
 
 .welcome-features {
