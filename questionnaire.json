@@ -302,29 +302,37 @@
     },
     "Q203": {
       "pillar_id": "GOV",
-      "text": "Existe-t-il un comité IA formel (membres identifiés, ordre du jour, procès-verbaux) et à quelle fréquence se réunit-il ?",
-      "help": "Comité de gouvernance IA avec réunions régulières et documentation.",
+      "text": "Lorsqu'un nouveau cas d'usage IA est envisagé, comment la décision est-elle prise ?",
+      "help": "Processus de décision et d'arbitrage pour valider les nouveaux cas d'usage IA.",
       "type": "single_choice",
       "options": [
         {
           "id": "Q203_A",
-          "label": "Non, aucun comité IA formel identifié.",
+          "label": "Chaque équipe décide seule, sans validation transverse",
           "score": 0,
           "next_question_id": "Q301",
-          "tags": ["gov_pas_de_comite"]
+          "tags": ["gov_decision_absente"]
         },
         {
           "id": "Q203_B",
-          "label": "Oui, comité IA formel se réunissant moins de 4 fois par an.",
+          "label": "Validation informelle (manager / IT / data) sans cadre défini",
           "score": 2,
-          "next_question_id": "Q301"
+          "next_question_id": "Q301",
+          "tags": ["gov_decision_informelle"]
         },
         {
           "id": "Q203_C",
-          "label": "Oui, comité IA formel se réunissant au moins trimestriellement (4+ fois/an) avec ordre du jour et suivi d'actions.",
+          "label": "Décision partagée (IT, métier, data) avec critères connus",
+          "score": 3,
+          "next_question_id": "Q301",
+          "tags": ["gov_decision_partagee"]
+        },
+        {
+          "id": "Q203_D",
+          "label": "Processus clair d'arbitrage (valeur, risques, conformité, ROI)",
           "score": 4,
           "next_question_id": "Q301",
-          "tags": ["gov_comite_actif"]
+          "tags": ["gov_decision_formelle"]
         }
       ]
     },
