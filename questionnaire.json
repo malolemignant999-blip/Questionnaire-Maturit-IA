@@ -468,32 +468,32 @@
 },
     "Q401": {
       "pillar_id": "TECH",
-      "text": "Quel est votre niveau d'outillage pour développer et déployer des modèles IA/ML ?",
-      "help": "Environnements de dev, outils MLOps, CI/CD, monitoring des modèles.",
+      "text": "Aujourd'hui, comment votre entreprise met-elle concrètement en œuvre des solutions d'IA (de l'idée jusqu'à l'usage réel) ?",
+      "help": "Processus de développement, déploiement et utilisation des solutions IA dans votre organisation.",
       "type": "single_choice",
       "options": [
         {
           "id": "Q401_A",
-          "label": "Projets IA ponctuels voire pas du tout de projets IA, sans outillage standardisé (scripts ad hoc).",
+          "label": "Nous n'utilisons pas ou très peu l'IA → Quelques tests ou expérimentations isolées, sans méthode ni outils communs.",
           "score": 0,
           "next_question_id": "Q501",
           "tags": ["tech_ad_hoc"]
         },
         {
           "id": "Q401_B",
-          "label": "Quelques outils partagés (ex: notebooks, IDE) mais sans pipeline complet.",
+          "label": "Nous utilisons l'IA de façon ponctuelle → Des outils existent, mais beaucoup de choses sont faites à la main et dépendent des personnes.",
           "score": 2,
           "next_question_id": "Q402"
         },
         {
           "id": "Q401_C",
-          "label": "Plateforme ML ou MLOps partiellement déployée avec pipeline de déploiement automatisé et processus documenté.",
+          "label": "Nous avons une approche structurée → Les solutions IA peuvent être déployées de manière relativement fiable, avec des règles et des processus définis.",
           "score": 3,
           "next_question_id": "Q402"
         },
         {
           "id": "Q401_D",
-          "label": "Stack IA complète opérationnelle : pipeline MLOps automatisé, monitoring en temps réel, registry de modèles centralisé et processus CI/CD documenté.",
+          "label": "L'IA est intégrée et maîtrisée dans nos opérations → Les solutions IA sont déployées, suivies et améliorées en continu, avec un haut niveau de fiabilité.",
           "score": 4,
           "next_question_id": "Q402",
           "tags": ["tech_mature"]
